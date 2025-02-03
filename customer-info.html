@@ -1,74 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Info & Estimate</title>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand On - Customer Information</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <nav class="container">
-      <div class="logo">
-        <h1>Brand On</h1>
-        <p class="brand-slogan">"Switch On Your Success."</p>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="customer-info.html">Customer Info</a></li>
-        <li><a href="index.html#solutions">Solutions</a></li>
-        <li><a href="index.html#merch">Merch</a></li>
-        <li><a href="index.html#testimonials">Success Stories</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Header Section -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <h1>Brand On</h1>
+                <p class="brand-slogan">"Switch On Your Success."</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="customer-info.html">Customer Info</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Customer Information Form -->
-  <section class="form-section">
-    <h2>Provide Your Details</h2>
-    <p>Complete the form below to generate your personalized estimate and proposal.</p>
-    <form id="customer-form">
-      <div class="form-group">
-        <label for="company-name">Company Name:</label>
-        <input type="text" id="company-name" name="company_name" placeholder="Enter your company name" required>
-      </div>
-      <div class="form-group">
-        <label for="industry">Industry:</label>
-        <input type="text" id="industry" name="industry" placeholder="E.g., Construction, Retail, etc." required>
-      </div>
-      <div class="form-group">
-        <label for="services">Select Services:</label>
-        <select id="services" name="services[]" multiple>
-          <option value="branding">Branding - $1,500</option>
-          <option value="web_design">Web Design - $2,500</option>
-          <option value="digital_ads">Digital Ads - $1,000</option>
-          <option value="social_media">Social Media - $800</option>
-          <option value="drone_photography">Drone Photography - $1,200</option>
-          <option value="progress_photos">Progress Photos - $900</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="merch">Merchandise Design:</label>
-        <input type="number" id="merch" name="merch" placeholder="Number of items" min="0">
-        <small>Design Fee: $100/item + 10% hosting fee</small>
-      </div>
-      <div class="form-group">
-        <label for="additional-info">Additional Information:</label>
-        <textarea id="additional-info" name="additional_info" rows="4" placeholder="Share more details about your project"></textarea>
-      </div>
-      <div id="estimate-total">
-        <p><strong>Estimated Total:</strong> $<span id="total">0</span></p>
-      </div>
-      <button type="button" class="cta-button" id="generate-pdf">Download Proposal</button>
-    </form>
-  </section>
+    <!-- Form Section -->
+    <section class="form-section">
+        <h2>Provide Your Details</h2>
+        <p>Complete the form below to generate your personalized proposal.</p>
+        <form id="customer-form" class="customer-form">
+            <div class="form-group">
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="company_name" placeholder="Enter your company name" required>
+            </div>
+            <div class="form-group">
+                <label for="industry">Industry:</label>
+                <input type="text" id="industry" name="industry" placeholder="E.g., Construction, Retail, etc." required>
+            </div>
+            <div class="form-group">
+                <label for="services">Select Services:</label>
+                <select id="services" name="services" multiple>
+                    <option value="branding">Branding</option>
+                    <option value="web-design">Web Design</option>
+                    <option value="social-media">Social Media Management</option>
+                    <option value="drone-photography">Drone Photography</option>
+                    <option value="merch-store">Merch Store Setup</option>
+                    <option value="progress-photos">Project Progress Photos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="merch-designs">Merchandise Design (Number of Items):</label>
+                <input type="number" id="merch-designs" name="merch_designs" placeholder="Enter quantity" min="1">
+            </div>
+            <div class="form-group">
+                <label for="additional-info">Additional Information:</label>
+                <textarea id="additional-info" name="additional_info" rows="4" placeholder="Provide any additional details"></textarea>
+            </div>
+            <button type="submit" class="cta-button">Generate Proposal</button>
+        </form>
+    </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Brand On. All Rights Reserved.</p>
-  </footer>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Brand On. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
