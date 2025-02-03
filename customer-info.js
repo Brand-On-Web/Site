@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
-        
+
         const companyName = document.getElementById("company-name").value;
         const industry = document.getElementById("industry").value;
         const futureGoals = document.getElementById("future-goals").value;
@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let estimateTotal = 0;
         let merchDetails = [];
 
+        // Gather selected services and calculate costs
         document.querySelectorAll("input[name='services']:checked").forEach(service => {
             selectedServices.push(service.value);
 
@@ -30,23 +31,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
                 case "merchstore":
                     estimateTotal += 300;
-                    
-                    // Capture merch details
+
+                    // Collect merch details
                     document.querySelectorAll(".merch-item:checked").forEach(item => {
                         const itemName = item.value;
-                        const itemQty = document.getElementById(`${itemName}-qty`).value || 0;
+                        const itemQty = parseInt(document.getElementById(`${itemName}-qty`).value || "0");
                         if (itemQty > 0) {
                             merchDetails.push(`${itemName.toUpperCase()} x${itemQty}`);
-                            estimateTotal += itemQty * 30; // $30 setup fee per item
+                            estimateTotal += itemQty * 30; // Example cost per item
                         }
                     });
 
-                    const featureCount = document.getElementById("merch-features").value || 0;
-                    estimateTotal += featureCount * 20; // $20 per feature
+                    const featureCount = parseInt(document.getElementById("merch-features").value || "0");
+                    estimateTotal += featureCount * 20; // Example cost per feature
                     break;
             }
         });
 
+        // Proposal content generation
         let proposalContent = `
         ----------------------------------------------------------
         BRAND ON - SERVICE PROPOSAL
@@ -54,73 +56,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
         Dear ${companyName},
 
-        We appreciate your interest in our services. At Brand On, we specialize in delivering high-quality, results-driven solutions tailored to businesses like yours in the **${industry}** sector.
+        Thank you for considering Brand On for your business needs. We are excited to work with a dynamic company in the **${industry}** industry and help you achieve your goals of ${futureGoals}.
 
-        Based on our initial discussions, we’ve outlined the following services to help you **enhance your brand, streamline your operations, and increase market visibility**.
+        Based on your selections, here is a summary of our proposed services and estimated investment:
 
         ----------------------------------------------------------
-        SELECTED SERVICES & INVESTMENT SUMMARY
-        ----------------------------------------------------------
-        Services Requested:
+        SELECTED SERVICES:
         ${selectedServices.map(service => `- ${formatServiceName(service)}`).join("\n")}
 
         ${merchDetails.length > 0 ? `\nMERCHANDISE DETAILS:\n${merchDetails.join("\n")}` : ""}
 
-        Your estimated investment for this project: **$${estimateTotal}**
-
         ----------------------------------------------------------
+        ESTIMATED INVESTMENT: $${estimateTotal}
+        ----------------------------------------------------------
+
         WHY CHOOSE BRAND ON?
-        ----------------------------------------------------------
-        🔹 **Industry-Leading Branding & Digital Marketing:** Our branding and identity solutions position your business as a market leader with a modern, competitive look.  
-
-        🔹 **Innovative Web Solutions:** Whether it's a full website redesign or a customer portal, we ensure your site is built for conversions and ease of use.  
-
-        🔹 **High-Impact Merchandising:** With our on-demand merch services, you get **zero upfront costs, no inventory management, and automated fulfillment**, allowing your business to profit without logistics headaches.  
-
-        🔹 **Ongoing Support & Optimization:** We don’t just build — we **optimize, manage, and refine** your digital presence to ensure you stay ahead of the competition.  
+        - **Expertise in Branding & Marketing:** Tailored solutions that position your business for success.
+        - **Cutting-Edge Web Design:** Modern, responsive designs that engage users and drive results.
+        - **Seamless Merch Solutions:** Zero inventory and high-quality on-demand production.
+        - **Ongoing Support:** Continuous optimization and support to keep your business ahead.
 
         ----------------------------------------------------------
-        MERCH SERVICE FEE STRUCTURE
-        ----------------------------------------------------------
-        We’re committed to **zero-inventory, low-cost, high-quality** merchandising. Each merch order includes a **10% service fee**, which helps **cover logistics, hosting, and continuous support for your online store.** This ensures your store operates efficiently without added management burdens.
+        NEXT STEPS:
+        1️⃣ Review the proposal and provide any feedback.
+        2️⃣ Confirm your interest to move forward.
+        3️⃣ Let’s start transforming your business!
 
         ----------------------------------------------------------
-        NEXT STEPS
-        ----------------------------------------------------------
-        1️⃣ **Review the proposal and provide any feedback.**  
-        2️⃣ **Let us know if you'd like to customize any details.**  
-        3️⃣ **Once confirmed, we’ll finalize the scope and begin execution.**  
-
-        If you have any questions or would like to move forward, feel free to reply at your convenience.
+        We look forward to collaborating with you.
 
         Best regards,  
         **Brand On Team**  
-        **[Your Contact Information]**  
+        **[Your Contact Information]**
 
         ----------------------------------------------------------
-        Brand On - Elevate Your Business | www.brand-on.com
+        Brand On | Empowering Businesses - www.brand-on.com
         ----------------------------------------------------------
         `;
 
+        // Download proposal
         downloadProposal(proposalContent);
     });
-});
 
-function formatServiceName(service) {
-    switch (service) {
-        case "branding": return "Branding & Identity";
-        case "webdesign": return "Web Design & Development";
-        case "drone": return "Drone Photography";
-        case "socialmedia": return "Social Media Presence";
-        case "merchstore": return "Clothing & Merch Store";
-        default: return service;
+    function formatServiceName(service) {
+        switch (service) {
+            case "branding": return "Branding & Identity";
+            case "webdesign": return "Web Design & Development";
+            case "drone": return "Drone Photography";
+            case "socialmedia": return "Social Media Presence";
+            case "merchstore": return "Clothing & Merch Store";
+            default: return service;
+        }
     }
-}
 
-function downloadProposal(content) {
-    const blob = new Blob([content], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "Proposal.txt";
-    link.click();
-}
+    function downloadProposal(content) {
+        const blob = new Blob([content], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "Proposal.txt";
+        link.click();
+    }
+});
