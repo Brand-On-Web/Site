@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Information Form</title>
+    <title>Company Info Form</title>
     <link rel="stylesheet" href="customer-info.css">
     <script defer src="customer-info.js"></script>
 </head>
 <body>
-
     <section class="form-section">
         <h2>Company Information</h2>
-        <p>Please provide details about your business. Our team will review your submission and prepare a proposal.</p>
-
+        <p>Provide details about your business, and we’ll generate a proposal for review.</p>
+        
         <form id="customer-form">
-            <!-- Basic Company Details -->
+            <!-- Basic Company Information -->
             <div class="form-group">
                 <label for="company-name">Company Name:</label>
                 <input type="text" id="company-name" name="company_name" required>
@@ -24,47 +23,97 @@
                 <input type="text" id="industry" name="industry" required>
             </div>
             <div class="form-group">
-                <label for="history">Company History:</label>
-                <textarea id="history" name="history" rows="3"></textarea>
-            </div>
-            <div class="form-group">
                 <label for="future-goals">Future Goals:</label>
                 <textarea id="future-goals" name="future_goals" rows="3"></textarea>
             </div>
-            <div class="form-group">
-                <label for="brand-colors">Brand Colors:</label>
-                <input type="text" id="brand-colors" name="brand_colors">
-            </div>
-            <div class="form-group">
-                <label for="logo">Upload Company Logo:</label>
-                <input type="file" id="logo" name="logo" accept="image/*">
+
+            <!-- Services Selection -->
+            <h3>Select the Services You Need:</h3>
+            
+            <!-- Branding & Identity -->
+            <div class="service-group">
+                <label><input type="checkbox" name="services" value="branding" id="branding"> Branding & Identity</label>
+                <div class="sub-options" id="branding-options">
+                    <label><input type="checkbox" name="branding-options" value="overhaul"> Brand Overhaul or Creation</label>
+                    <label><input type="checkbox" name="branding-options" value="modernization"> Brand Optimization or Modernization</label>
+                    <label><input type="checkbox" name="branding-options" value="ad-campaign"> Ad Campaign</label>
+                    <label><input type="checkbox" name="branding-options" value="recurring-marketing"> Recurring Marketing</label>
+                </div>
             </div>
 
-            <!-- Service Selection -->
-            <h3>Select Services:</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="services" value="branding"> Branding & Identity</label>
-                <label><input type="checkbox" name="services" value="webdesign"> Web Design & Development</label>
-                <label><input type="checkbox" name="services" value="drone"> Drone Photography</label>
-                <label><input type="checkbox" name="services" value="socialmedia"> Social Media Presence</label>
-                <label><input type="checkbox" name="services" value="progressphotos"> Project Progress Photos</label>
-                <label><input type="checkbox" name="services" value="merchstore"> Clothing/Merch Store Setup</label>
+            <!-- Web Design & Development -->
+            <div class="service-group">
+                <label><input type="checkbox" name="services" value="webdesign" id="webdesign"> Web Design & Development</label>
+                <div class="sub-options" id="webdesign-options">
+                    <label><input type="checkbox" name="web-options" value="new-design"> Complete Web Design</label>
+                    <label><input type="checkbox" name="web-options" value="modernize"> Modernize Existing Website</label>
+                    <label><input type="checkbox" name="web-options" value="employee-portal"> Employee Portal Integration</label>
+                    <label><input type="checkbox" name="web-options" value="order-tracking"> Employee Login for Order Tracking</label>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="requirements">Number of Detailed Requirements:</label>
-                <input type="number" id="requirements" name="requirements" min="0" value="0">
+            <!-- Drone Photography -->
+            <div class="service-group">
+                <label><input type="checkbox" name="services" value="drone" id="drone"> Drone Photography</label>
+                <div class="sub-options" id="drone-options">
+                    <label><input type="checkbox" name="drone-options" value="single-site"> One-Time Drone Photography (Single Site)</label>
+                    <label><input type="checkbox" name="drone-options" value="multi-site"> One-Time Drone Photography (Multiple Sites)</label>
+                    <label><input type="checkbox" name="drone-options" value="biweekly"> Biweekly Drone Photography</label>
+                    <label><input type="checkbox" name="drone-options" value="monthly"> Monthly Drone Photos Linked to Project Tracking</label>
+                </div>
             </div>
 
-            <div class="form-group" id="clothing-details" style="display: none;">
-                <label for="clothing-items">Number of Clothing Items to Design:</label>
-                <input type="number" id="clothing-items" name="clothing_items" min="0" value="0">
+            <!-- Social Media Presence -->
+            <div class="service-group">
+                <label><input type="checkbox" name="services" value="socialmedia" id="socialmedia"> Social Media Presence</label>
+                <div class="sub-options" id="socialmedia-options">
+                    <label><input type="checkbox" name="social-options" value="launch"> Launch from Scratch</label>
+                    <label><input type="checkbox" name="social-options" value="management"> Monthly Posting & Management</label>
+                </div>
             </div>
 
-            <div class="estimate-result" id="estimate-result" style="display: none;"></div>
+            
+            <!-- Clothing & Merch Store Section -->
+<div class="service-group">
+    <label>
+        <input type="checkbox" name="services" value="merchstore" id="merchstore"> Clothing & Merch Store
+    </label>
+    <div class="sub-options" id="merchstore-options">
+        <p>Select the items you would like to include in your store:</p>
+        
+        <div class="merch-items">
+            <label><input type="checkbox" class="merch-item" value="tshirt"> T-Shirts</label>
+            <input type="number" class="merch-quantity" id="tshirt-qty" name="tshirt_qty" min="1" placeholder="Quantity" style="display: none;">
+            
+            <label><input type="checkbox" class="merch-item" value="hoodie"> Hoodies</label>
+            <input type="number" class="merch-quantity" id="hoodie-qty" name="hoodie_qty" min="1" placeholder="Quantity" style="display: none;">
+            
+            <label><input type="checkbox" class="merch-item" value="sweater"> Sweaters</label>
+            <input type="number" class="merch-quantity" id="sweater-qty" name="sweater_qty" min="1" placeholder="Quantity" style="display: none;">
+            
+            <label><input type="checkbox" class="merch-item" value="joggers"> Joggers</label>
+            <input type="number" class="merch-quantity" id="joggers-qty" name="joggers_qty" min="1" placeholder="Quantity" style="display: none;">
+            
+            <label><input type="checkbox" class="merch-item" value="hats"> Hats</label>
+            <input type="number" class="merch-quantity" id="hats-qty" name="hats_qty" min="1" placeholder="Quantity" style="display: none;">
+            
+            <label><input type="checkbox" class="merch-item" value="beanies"> Beanies</label>
+            <input type="number" class="merch-quantity" id="beanies-qty" name="beanies_qty" min="1" placeholder="Quantity" style="display: none;">
+            
+            <label><input type="checkbox" class="merch-item" value="hi-viz"> Hi-Viz T-Shirts</label>
+            <input type="number" class="merch-quantity" id="hi-viz-qty" name="hi_viz_qty" min="1" placeholder="Quantity" style="display: none;">
+            
+            <label><input type="checkbox" class="merch-item" value="jackets"> Jackets</label>
+            <input type="number" class="merch-quantity" id="jackets-qty" name="jackets_qty" min="1" placeholder="Quantity" style="display: none;">
+        </div>
+
+        <p>Number of Features (Logos, Sleeve Prints, etc.):</p>
+        <input type="number" id="merch-features" name="merch_features" min="1" placeholder="Number of Features">
+    </div>
+</div>
+
             <button type="submit" class="submit-button">Generate Proposal</button>
         </form>
     </section>
-
 </body>
 </html>
