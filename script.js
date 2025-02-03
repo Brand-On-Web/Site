@@ -83,3 +83,25 @@ document.getElementById("customer-form").addEventListener("submit", function (e)
     link.download = `${companyName}_Proposal.txt`;
     link.click();
 });
+// Burger Menu Toggle
+document.addEventListener("DOMContentLoaded", () => {
+    const burgerMenu = document.querySelector(".burger-menu");
+    const navLinks = document.createElement("div");
+
+    // Create the navigation menu dynamically
+    navLinks.classList.add("nav-links");
+    navLinks.innerHTML = `
+        <ul>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#merch">Merch Stores</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    `;
+    document.body.appendChild(navLinks);
+
+    // Add event listener to toggle navigation
+    burgerMenu.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        burgerMenu.classList.toggle("active");
+    });
+});
