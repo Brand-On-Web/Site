@@ -3,106 +3,154 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background: #1C1C1C; /* Dark background */
+    background: #2A2A2A; /* Dark gray background */
     color: #FFF; /* White text */
 }
 
 /* Header */
-.header {
-    background: #000; /* Black */
+header {
+    background: #000; /* Black background */
+    color: #C7FF00; /* Neon green text */
     padding: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
-.header .logo {
-    font-size: 2rem;
-    color: #00FF00; /* Neon green */
+
+header h1 {
+    font-size: 1.8rem;
+    color: #C7FF00; /* Neon green */
+    margin: 0;
 }
-.header .tagline {
-    color: #FFF; /* White */
-}
+
 .burger-menu {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-}
-.burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.burger {
+    width: 100%;
     height: 3px;
     background: #FFF; /* White */
-    margin: 6px 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.burger-menu.active .burger:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger-menu.active .burger:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active .burger:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Navigation Links */
+.nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: #000; /* Black */
+    border: 2px solid #C7FF00; /* Neon green */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links a {
+    color: #FFF; /* White */
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #C7FF00; /* Neon green */
 }
 
 /* Hero Section */
 .hero {
+    background: #C7FF00; /* Neon green */
+    color: #2A2A2A; /* Dark gray text */
     text-align: center;
     padding: 60px 20px;
 }
-.hero h2 {
+
+.hero h1 {
     font-size: 2.5rem;
-    color: #00FF00; /* Neon green */
+    color: #2A2A2A; /* Dark gray */
 }
+
 .hero p {
+    color: #2A2A2A;
+    margin-top: 20px;
     font-size: 1.2rem;
+}
+
+.hero .cta-button {
+    background: #000; /* Black */
+    color: #C7FF00; /* Neon green */
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.hero .cta-button:hover {
+    background: #C7FF00; /* Neon green */
+    color: #000; /* Black */
+}
+
+/* Section Titles */
+section h2 {
+    color: #C7FF00; /* Neon green */
+    text-align: center;
+    font-size: 2rem;
     margin-bottom: 20px;
 }
-.hero .btn {
-    background: #00FF00; /* Neon green */
-    padding: 10px 20px;
-    color: #000;
-    border: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-}
 
-/* Solutions Section */
-.solutions {
-    padding: 40px 20px;
-    text-align: center;
-}
-.solutions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-.solution-box {
-    background: #252525;
-    border: 2px solid #00FF00; /* Neon green */
-    padding: 20px;
+/* Cards (Wireframe Boxes) */
+.card {
+    background: #2A2A2A; /* Dark gray */
+    border: 2px solid #C7FF00; /* Neon green */
     border-radius: 10px;
-    text-align: left;
-}
-.solution-box h3 {
-    color: #00FF00; /* Neon green */
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Merch Section */
-.merch {
-    padding: 40px 20px;
-    background: #000; /* Black */
+.card h3 {
+    color: #C7FF00; /* Neon green */
+    margin-bottom: 10px;
+}
+
+.card p {
     color: #FFF; /* White */
-}
-.merch ul {
-    list-style: none;
-    padding: 0;
-}
-.merch ul li {
-    margin: 10px 0;
-}
-.merch .btn {
-    background: #00FF00; /* Neon green */
-    padding: 10px 20px;
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
 }
 
 /* Footer */
 footer {
+    background: #000; /* Black */
+    color: #FFF; /* White */
     text-align: center;
     padding: 20px;
-    background: #111; /* Very dark grey */
-    color: #FFF;
+    margin-top: 40px;
 }
