@@ -1,143 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Company Info & High-Value Estimate</title>
-  <nav>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="customer-info.html">Customer Info</a></li>
-    </ul>
-</nav>
-
-  <!-- Montserrat Font (for style) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" 
-    rel="stylesheet"
-  />
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- jsPDF (CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-3P2cVph0WmyWm6r14xUPKPzwdVBVVXPT/Os0AgVBAiOWz6kdJq6a3GKD27kQ17jfH63n9OQG+rxRqiC3N35hDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <!-- Defer main JS so it loads after HTML -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Info & Estimate</title>
+  <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <nav class="container">
+      <div class="logo">
+        <h1>Brand On</h1>
+        <p class="brand-slogan">"Switch On Your Success."</p>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="customer-info.html">Customer Info</a></li>
+        <li><a href="index.html#solutions">Solutions</a></li>
+        <li><a href="index.html#merch">Merch</a></li>
+        <li><a href="index.html#testimonials">Success Stories</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- Main Form Section -->
+  <!-- Customer Information Form -->
   <section class="form-section">
-    <h2>Company Information & Draft Proposal</h2>
-    <p>Please provide details about your business and select the services you need. We'll create a draft proposal you can download.</p>
-    
-    <form id="company-form" class="company-form">
-      <!-- Basic Company Info -->
+    <h2>Provide Your Details</h2>
+    <p>Complete the form below to generate your personalized estimate and proposal.</p>
+    <form id="customer-form">
       <div class="form-group">
         <label for="company-name">Company Name:</label>
-        <input type="text" id="company-name" name="company_name" placeholder="Enter your company name" required />
+        <input type="text" id="company-name" name="company_name" placeholder="Enter your company name" required>
       </div>
       <div class="form-group">
         <label for="industry">Industry:</label>
-        <input type="text" id="industry" name="industry" placeholder="Construction, Retail, etc." required />
+        <input type="text" id="industry" name="industry" placeholder="E.g., Construction, Retail, etc." required>
       </div>
       <div class="form-group">
-        <label for="history">Company History:</label>
-        <textarea id="history" name="history" rows="4" placeholder="Tell us about your company's history"></textarea>
+        <label for="services">Select Services:</label>
+        <select id="services" name="services[]" multiple>
+          <option value="branding">Branding - $1,500</option>
+          <option value="web_design">Web Design - $2,500</option>
+          <option value="digital_ads">Digital Ads - $1,000</option>
+          <option value="social_media">Social Media - $800</option>
+          <option value="drone_photography">Drone Photography - $1,200</option>
+          <option value="progress_photos">Progress Photos - $900</option>
+        </select>
       </div>
       <div class="form-group">
-        <label for="future-goals">Future Goals:</label>
-        <textarea id="future-goals" name="future_goals" rows="4" placeholder="Describe your company's vision and goals"></textarea>
+        <label for="merch">Merchandise Design:</label>
+        <input type="number" id="merch" name="merch" placeholder="Number of items" min="0">
+        <small>Design Fee: $100/item + 10% hosting fee</small>
       </div>
-      <div class="form-group">
-        <label for="brand-colors">Brand Colors:</label>
-        <input type="text" id="brand-colors" name="brand_colors" placeholder="E.g., Blue, White, Yellow" />
-      </div>
-      <div class="form-group">
-        <label for="logo">Upload Company Logo:</label>
-        <input type="file" id="logo" name="logo" accept="image/*" />
-      </div>
-      <div class="form-group">
-        <label for="services-offered">What services do you offer?</label>
-        <textarea id="services-offered" name="services_offered" rows="3" placeholder="List the services you currently provide"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="target-audience">Target Audience:</label>
-        <textarea id="target-audience" name="target_audience" rows="3" placeholder="Describe your ideal customer base"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="social-media">Social Media Links:</label>
-        <textarea id="social-media" name="social_media" rows="2" placeholder="Provide links to your social media profiles"></textarea>
-      </div>
-
       <div class="form-group">
         <label for="additional-info">Additional Information:</label>
-        <textarea id="additional-info" name="additional_info" rows="4" placeholder="Anything else you'd like us to know?"></textarea>
+        <textarea id="additional-info" name="additional_info" rows="4" placeholder="Share more details about your project"></textarea>
       </div>
-
-      <hr />
-
-      <!-- Our High-Value Services -->
-      <h3>Select Services You'd Like From Brand On:</h3>
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" name="services" value="branding" />
-          Branding & Identity
-        </label>
-        <label>
-          <input type="checkbox" name="services" value="webdesign" />
-          Web Design & Development
-        </label>
-        <label>
-          <input type="checkbox" name="services" value="drone" />
-          Drone Photography
-        </label>
-        <label>
-          <input type="checkbox" name="services" value="socialmedia" />
-          Social Media Presence
-        </label>
-        <label>
-          <input type="checkbox" name="services" value="progressphotos" />
-          Project Progress Photos
-        </label>
-        <label>
-          <input type="checkbox" name="services" value="merchstore" />
-          Clothing/Merch Store Setup
-        </label>
+      <div id="estimate-total">
+        <p><strong>Estimated Total:</strong> $<span id="total">0</span></p>
       </div>
-
-      <!-- Additional Requirements -->
-      <div class="form-group">
-        <label for="requirements">Number of Detailed Requirements:</label>
-        <input type="number" id="requirements" name="requirements" min="0" value="0" />
-      </div>
-
-      <!-- Clothing Items (if merchstore is chosen) -->
-      <div class="form-group" id="clothing-details" style="display: none;">
-        <label for="clothing-items">Number of Clothing Items to Design:</label>
-        <input type="number" id="clothing-items" name="clothing_items" min="0" value="0" />
-      </div>
-
-      <!-- Buttons -->
-      <button type="button" class="calculate-button" id="calculate-btn">
-        Calculate Draft Estimate
-      </button>
-
-      <!-- For testing: show the running total at the bottom of the form -->
-      <div class="estimate-result" id="estimate-result">
-        <!-- Hidden by default; we can reveal after calculation if you want -->
-      </div>
-
-      <button type="button" class="submit-button" id="pdf-btn" style="display: none;">
-        Download Proposal PDF
-      </button>
-
+      <button type="button" class="cta-button" id="generate-pdf">Download Proposal</button>
     </form>
   </section>
 
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Brand On. All Rights Reserved.</p>
+  </footer>
 </body>
 </html>
