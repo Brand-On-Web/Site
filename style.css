@@ -1,105 +1,110 @@
 /* General Styles */
 body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #161616; /* Black */
-    color: #FFFFFF; /* White */
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #161616;
+  color: #FFFFFF;
 }
 
 /* Header */
 header {
-    text-align: center;
-    padding: 20px;
-    background: #212121; /* Darker Gray */
+  background: #161616;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.container h1 {
-    color: #00FF00; /* Neon Green */
+header h1 {
+  font-size: 2rem;
+  color: #00FF00;
 }
 
 .tagline {
-    font-style: italic;
-    color: #00FF00;
+  font-size: 1.2rem;
+  color: #CCCCCC;
 }
 
-.nav-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+nav {
+  margin-top: 15px;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #00FF00;
-    font-weight: bold;
+#nav-links {
+  list-style: none;
+  display: none;
+  padding: 0;
+}
+
+#nav-links li {
+  margin: 5px 0;
+}
+
+#nav-links a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.burger-menu {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.burger-menu span {
+  background: #00FF00;
+  height: 3px;
+  width: 25px;
+  display: block;
 }
 
 /* Hero Section */
-#hero {
-    text-align: center;
-    padding: 40px 20px;
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background: #222222;
 }
 
-#hero h2 {
-    font-size: 2.5rem;
-    color: #00FF00;
+.hero h2 {
+  color: #00FF00;
+  font-size: 2.5rem;
 }
 
-#hero p {
-    margin: 20px 0;
+.hero .cta {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background: #00FF00;
+  color: #161616;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
-.cta-button {
-    display: inline-block;
-    background: #00FF00;
-    color: #161616;
-    padding: 15px 30px;
-    text-transform: uppercase;
-    font-weight: bold;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background 0.3s ease;
+/* Solutions */
+.solutions {
+  padding: 50px 20px;
 }
 
-.cta-button:hover {
-    background: #FFFFFF;
-    color: #00FF00;
+.solution {
+  background: #222222;
+  padding: 20px;
+  margin: 10px 0;
+  border-left: 5px solid #00FF00;
 }
 
-/* Solutions Section */
-#solutions {
-    padding: 40px 20px;
-    text-align: center;
+/* Testimonials */
+.testimonials blockquote {
+  font-style: italic;
+  border-left: 5px solid #00FF00;
+  padding-left: 15px;
+  color: #CCCCCC;
 }
 
-.solution-box {
-    background: #212121;
-    border: 1px solid #00FF00;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
-}
-
-/* Merch Section */
-#merch {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.merch-box {
-    background: #212121;
-    padding: 20px;
-    border: 1px solid #00FF00;
-    border-radius: 5px;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #212121;
-    color: #AAAAAA;
+/* Contact */
+.contact {
+  background: #161616;
+  text-align: center;
+  padding: 20px;
 }
