@@ -1,67 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Info – Tailored Proposal</title>
-  <!-- Link to customer-info-specific CSS -->
-  <link rel="stylesheet" href="customer-info.css">
-  <script defer src="customer-info.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Information Form</title>
+    <link rel="stylesheet" href="customer-style.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-  <section class="form-section">
-    <h2>Customer Information</h2>
-    <p>Provide your details to help us create a personalized proposal and estimate.</p>
-    <form id="customer-form" class="customer-form">
-      <!-- Company Details -->
-      <div class="form-group">
-        <label for="company-name">Company Name:</label>
-        <input type="text" id="company-name" name="company_name" placeholder="Enter your company name" required>
-      </div>
-      <div class="form-group">
-        <label for="industry">Industry:</label>
-        <input type="text" id="industry" name="industry" placeholder="E.g., Construction, Retail" required>
-      </div>
-      <div class="form-group">
-        <label for="brand-colors">Brand Colors:</label>
-        <input type="text" id="brand-colors" name="brand_colors" placeholder="E.g., Blue, White, Yellow">
-      </div>
-      <div class="form-group">
-        <label for="logo">Upload Company Logo:</label>
-        <input type="file" id="logo" name="logo" accept="image/*">
-      </div>
 
-      <!-- Services -->
-      <h3>Select Services:</h3>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="services" value="branding"> Branding & Identity</label>
-        <label><input type="checkbox" name="services" value="webdesign"> Web Design & Development</label>
-        <label><input type="checkbox" name="services" value="drone"> Drone Photography</label>
-        <label><input type="checkbox" name="services" value="socialmedia"> Social Media Management</label>
-        <label><input type="checkbox" name="services" value="progressphotos"> Project Progress Photos</label>
-        <label><input type="checkbox" name="services" value="merchstore"> Merch Store Setup</label>
-      </div>
+    <section class="form-section">
+        <h2>Company Information</h2>
+        <p>Please provide the following details to help us create a tailored experience for your business.</p>
+        
+        <form id="customer-form">
+            
+            <!-- Business Basics -->
+            <div class="form-group">
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="company_name" placeholder="Enter your company name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="industry">Industry:</label>
+                <input type="text" id="industry" name="industry" placeholder="Construction, Retail, etc." required>
+            </div>
 
-      <div class="form-group">
-        <label for="requirements">Number of Requirements:</label>
-        <input type="number" id="requirements" name="requirements" min="0" placeholder="E.g., 5" value="0">
-      </div>
+            <div class="form-group">
+                <label for="brand-colors">Brand Colors:</label>
+                <input type="text" id="brand-colors" name="brand_colors" placeholder="E.g., Blue, White, Yellow">
+            </div>
 
-      <!-- Merchandise Setup Details -->
-      <div class="form-group" id="merch-details" style="display: none;">
-        <label for="clothing-items">Number of Clothing Items to Design:</label>
-        <input type="number" id="clothing-items" name="clothing_items" min="0" value="0">
-      </div>
+            <div class="form-group">
+                <label for="logo">Upload Company Logo:</label>
+                <input type="file" id="logo" name="logo" accept="image/*">
+            </div>
 
-      <!-- Additional Details -->
-      <div class="form-group">
-        <label for="additional-info">Additional Information:</label>
-        <textarea id="additional-info" name="additional_info" rows="4" placeholder="Anything else you'd like us to know"></textarea>
-      </div>
+            <!-- Business Insights -->
+            <div class="form-group">
+                <label for="history">Company History:</label>
+                <textarea id="history" name="history" rows="3" placeholder="Tell us about your company's history"></textarea>
+            </div>
 
-      <!-- Submit Button -->
-      <button type="submit" class="submit-button">Generate Proposal</button>
-    </form>
-  </section>
+            <div class="form-group">
+                <label for="future-goals">Future Goals:</label>
+                <textarea id="future-goals" name="future_goals" rows="3" placeholder="Describe your company's vision and goals"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="target-audience">Target Audience:</label>
+                <textarea id="target-audience" name="target_audience" rows="3" placeholder="Describe your ideal customer base"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="services-offered">Current Services Offered:</label>
+                <textarea id="services-offered" name="services_offered" rows="3" placeholder="List the services your business currently provides"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="social-media">Social Media Links:</label>
+                <textarea id="social-media" name="social_media" rows="2" placeholder="Provide links to your social media profiles"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="additional-info">Additional Information:</label>
+                <textarea id="additional-info" name="additional_info" rows="4" placeholder="Anything else you'd like us to know?"></textarea>
+            </div>
+
+            <hr>
+
+            <!-- Requested Services -->
+            <h3>Select Services You'd Like From Us:</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="services" value="branding"> Branding & Identity</label>
+                <label><input type="checkbox" name="services" value="webdesign"> Web Design & Development</label>
+                <label><input type="checkbox" name="services" value="drone"> Drone Photography</label>
+                <label><input type="checkbox" name="services" value="socialmedia"> Social Media Presence</label>
+                <label><input type="checkbox" name="services" value="progressphotos"> Project Progress Photos</label>
+                <label><input type="checkbox" name="services" value="merchstore"> Clothing/Merch Store Setup</label>
+            </div>
+
+            <div class="form-group">
+                <label for="requirements">Number of Detailed Requirements:</label>
+                <input type="number" id="requirements" name="requirements" min="0" value="0">
+            </div>
+
+            <!-- Merch Store Additional Fields -->
+            <div class="form-group" id="merch-details" style="display: none;">
+                <label for="clothing-items">Number of Clothing Items to Design:</label>
+                <input type="number" id="clothing-items" name="clothing_items" min="0" value="0">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-button">Generate Proposal</button>
+
+            <!-- Return to Main Page Button -->
+            <button type="button" class="return-button" onclick="window.location.href='index.html'">Return to Main Page</button>
+
+        </form>
+    </section>
+
 </body>
 </html>
