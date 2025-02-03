@@ -55,13 +55,26 @@ header {
 
 /* Hero Section */
 .hero {
-    background: #000;
+    background: #000; /* Black background */
     text-align: center;
-    padding: 50px;
+    padding: 50px 20px;
+}
+
+.hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .hero h2 {
-    color: #C7FF00;
+    color: #C7FF00; /* Neon green */
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #FFF; /* White */
+    margin-bottom: 20px;
+    font-size: 1.2rem;
 }
 
 .btn {
@@ -70,9 +83,10 @@ header {
     font-size: 1.2rem;
     border: 2px solid #C7FF00;
     background: none;
-    color: #C7FF00;
+    color: #C7FF00; /* Neon green */
     text-decoration: none;
     transition: 0.3s;
+    margin-top: 10px;
 }
 
 .btn:hover {
@@ -80,14 +94,18 @@ header {
     color: #000;
 }
 
-/* Pentagon Button */
-.pentagon {
-    position: absolute;
-    right: 15%;
-    transform: translateY(50%);
+/* Solutions Section */
+.solutions {
+    background: #2A2A2A; /* Grey background */
+    padding: 40px 20px;
+    text-align: center;
 }
 
-/* Solutions Section */
+.solutions h2 {
+    color: #FFF;
+    margin-bottom: 20px;
+}
+
 .solutions-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -95,10 +113,20 @@ header {
 }
 
 .solution-box {
-    border: 2px solid #C7FF00;
+    background: #1C1C1C; /* Slightly darker grey for boxes */
+    border: 2px solid #C7FF00; /* Neon green border */
     padding: 20px;
     border-radius: 5px;
     text-align: center;
+}
+
+.solution-box h3 {
+    color: #C7FF00;
+    margin-bottom: 10px;
+}
+
+.solution-box p {
+    color: #FFF;
 }
 
 /* Merch Section */
