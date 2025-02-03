@@ -1,1 +1,105 @@
+/* General Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #161616; /* Black */
+    color: #FFFFFF; /* White */
+}
 
+/* Header */
+header {
+    text-align: center;
+    padding: 20px;
+    background: #212121; /* Darker Gray */
+}
+
+.container h1 {
+    color: #00FF00; /* Neon Green */
+}
+
+.tagline {
+    font-style: italic;
+    color: #00FF00;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #00FF00;
+    font-weight: bold;
+}
+
+/* Hero Section */
+#hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+#hero h2 {
+    font-size: 2.5rem;
+    color: #00FF00;
+}
+
+#hero p {
+    margin: 20px 0;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #00FF00;
+    color: #161616;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #FFFFFF;
+    color: #00FF00;
+}
+
+/* Solutions Section */
+#solutions {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.solution-box {
+    background: #212121;
+    border: 1px solid #00FF00;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+/* Merch Section */
+#merch {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.merch-box {
+    background: #212121;
+    padding: 20px;
+    border: 1px solid #00FF00;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #212121;
+    color: #AAAAAA;
+}
