@@ -1,14 +1,13 @@
+// Customer Form Logic - Unchanged
 document.getElementById("customer-form").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Collect customer information
     const companyName = document.getElementById("company-name").value;
     const industry = document.getElementById("industry").value;
     const services = Array.from(document.getElementById("services").selectedOptions).map(option => option.text);
     const merchDesigns = parseInt(document.getElementById("merch-designs").value || 0);
     const additionalInfo = document.getElementById("additional-info").value;
 
-    // Pricing logic
     const pricing = {
         branding: 2000,
         "web-design": 3000,
@@ -19,11 +18,10 @@ document.getElementById("customer-form").addEventListener("submit", function (e)
     };
 
     const serviceCost = services.reduce((total, service) => total + (pricing[service.toLowerCase().replace(/\s/g, "-")] || 0), 0);
-    const merchCost = merchDesigns * 100; // $100 per design
-    const hostingFee = (merchCost + serviceCost) * 0.1; // 10% hosting fee
+    const merchCost = merchDesigns * 100;
+    const hostingFee = (merchCost + serviceCost) * 0.1;
     const totalEstimate = serviceCost + merchCost + hostingFee;
 
-    // Generate tailored paragraphs based on services
     const serviceDescriptions = {
         branding: "Our branding services will help your business stand out with professional and attention-grabbing branding strategies.",
         "web-design": "Our modern and responsive web design will convert your website visitors into loyal customers.",
@@ -38,7 +36,6 @@ document.getElementById("customer-form").addEventListener("submit", function (e)
         .filter(Boolean)
         .join(" ");
 
-    // Proposal content
     const proposalContent = `
         Brand On Proposal
         ==================
@@ -76,30 +73,18 @@ document.getElementById("customer-form").addEventListener("submit", function (e)
         Brand On Team
     `;
 
-    // Generate and download the proposal as a PDF
     const blob = new Blob([proposalContent], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `${companyName}_Proposal.txt`;
     link.click();
 });
-// Burger Menu Toggle
+
+// Burger Menu Logic
 document.addEventListener("DOMContentLoaded", () => {
     const burgerMenu = document.querySelector(".burger-menu");
-    const navLinks = document.createElement("div");
+    const navLinks = document.querySelector(".nav-links");
 
-    // Create the navigation menu dynamically
-    navLinks.classList.add("nav-links");
-    navLinks.innerHTML = `
-        <ul>
-            <li><a href="#solutions">Solutions</a></li>
-            <li><a href="#merch">Merch Stores</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-        </ul>
-    `;
-    document.body.appendChild(navLinks);
-
-    // Add event listener to toggle navigation
     burgerMenu.addEventListener("click", () => {
         navLinks.classList.toggle("active");
         burgerMenu.classList.toggle("active");
