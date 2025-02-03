@@ -6,22 +6,31 @@
     <title>Brand On</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <h1 class="logo">Brand On</h1>
+            <h1 class="logo"><span class="underlined">Brand </span>On</h1>
             <p class="tagline">"Switch On Your Success."</p>
-            <nav class="burger-menu">
+            <nav class="burger-menu" id="menu-toggle">
+                <div class="burger"></div>
+                <div class="burger"></div>
                 <div class="burger"></div>
             </nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#success-stories">Success Stories</a></li>
+                <li><a href="#merch">Merch</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
     </header>
 
     <section class="hero">
         <h2>We Build Brands That Drive Growth</h2>
         <p>Bold solutions for business owners who demand success.</p>
-        <a href="#solutions" class="btn neon">Discover Our Solutions</a>
+        <a href="customer-info.html" class="btn neon pentagon">Discover Our Solutions</a>
     </section>
 
     <section id="solutions" class="solutions">
@@ -56,15 +65,23 @@
 
     <section class="merch">
         <h2>Effortless Company Merch Stores</h2>
-        <p>
-            Empower your employees and customers to represent your brand effortlessly. With Brand On, you can enjoy a seamless, professionally designed online merch store with:
-        </p>
-        <ul>
-            <li>No inventory management – Everything is print-on-demand.</li>
-            <li>Zero upfront costs – Only pay when an order is placed.</li>
-            <li>Year-round availability – Perfect for incentives and employee rewards.</li>
-        </ul>
-        <a href="#contact" class="btn neon">Start Your Merch Store</a>
+        <div class="merch-content">
+            <p>Empower your employees and customers to represent your brand effortlessly.</p>
+            <ul class="benefits">
+                <li>✔ No inventory management – Everything is print-on-demand.</li>
+                <li>✔ Zero upfront costs – Only pay when an order is placed.</li>
+                <li>✔ Year-round availability – Perfect for incentives and employee rewards.</li>
+            </ul>
+            <a href="customer-info.html" class="btn neon">Start Your Merch Store</a>
+        </div>
+    </section>
+
+    <section id="success-stories" class="testimonials">
+        <h2>Success Stories</h2>
+        <blockquote>
+            <p>"Brand On transformed our online presence and boosted our engagement 300%!"</p>
+            <cite>– Sarah M., Business Owner</cite>
+        </blockquote>
     </section>
 
     <footer>
