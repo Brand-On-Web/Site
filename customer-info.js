@@ -1,97 +1,126 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("customer-form");
-  const merchDetails = document.getElementById("merch-details");
-  const clothingItemsInput = document.getElementById("clothing-items");
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("customer-form");
 
-  // Show/Hide Merch Details Based on Selection
-  form.addEventListener("change", () => {
-    const services = Array.from(form.querySelectorAll("input[name='services']:checked")).map(
-      (input) => input.value
-    );
-    merchDetails.style.display = services.includes("merchstore") ? "block" : "none";
-  });
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        const companyName = document.getElementById("company-name").value;
+        const industry = document.getElementById("industry").value;
+        const futureGoals = document.getElementById("future-goals").value;
 
-  // Handle Form Submission
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+        let selectedServices = [];
+        let estimateTotal = 0;
+        let merchDetails = [];
 
-    // Collect Form Data
-    const formData = new FormData(form);
-    const companyName = formData.get("company_name") || "Your Company";
-    const industry = formData.get("industry") || "Unknown Industry";
-    const brandColors = formData.get("brand_colors") || "Not provided";
-    const futureGoals = formData.get("future_goals") || "Not shared";
-    const additionalInfo = formData.get("additional_info") || "None";
-    const selectedServices = formData.getAll("services");
-    const numRequirements = parseInt(formData.get("requirements") || 0);
-    const clothingItems = parseInt(clothingItemsInput.value || 0);
+        document.querySelectorAll("input[name='services']:checked").forEach(service => {
+            selectedServices.push(service.value);
 
-    // Calculate Pricing
-    const serviceFee = selectedServices.length * 750; // Premium pricing per service
-    const requirementsFee = numRequirements * 100;
-    const merchFee = selectedServices.includes("merchstore") ? clothingItems * 120 + clothingItems * 12 : 0;
-    const totalEstimate = serviceFee + requirementsFee + merchFee;
+            switch (service.value) {
+                case "branding":
+                    estimateTotal += 3000;
+                    break;
+                case "webdesign":
+                    estimateTotal += 5000;
+                    break;
+                case "drone":
+                    estimateTotal += 500;
+                    break;
+                case "socialmedia":
+                    estimateTotal += 700;
+                    break;
+                case "merchstore":
+                    estimateTotal += 300;
+                    
+                    // Capture merch details
+                    document.querySelectorAll(".merch-item:checked").forEach(item => {
+                        const itemName = item.value;
+                        const itemQty = document.getElementById(`${itemName}-qty`).value || 0;
+                        if (itemQty > 0) {
+                            merchDetails.push(`${itemName.toUpperCase()} x${itemQty}`);
+                            estimateTotal += itemQty * 30; // $30 setup fee per item
+                        }
+                    });
 
-    // Generate a Detailed Proposal
-    const servicesList = selectedServices
-      .map((service) => `- ${service.replace(/_/g, " ").toUpperCase()}`)
-      .join("\n");
+                    const featureCount = document.getElementById("merch-features").value || 0;
+                    estimateTotal += featureCount * 20; // $20 per feature
+                    break;
+            }
+        });
 
-    const proposalContent = `
-${companyName}: Tailored Proposal from Brand On
-==================================================
+        let proposalContent = `
+        ----------------------------------------------------------
+        BRAND ON - SERVICE PROPOSAL
+        ----------------------------------------------------------
 
-Hello ${companyName},
+        Dear ${companyName},
 
-Thank you for considering Brand On to elevate your business! Based on the details provided, we’ve created this tailored proposal to help you achieve success.
+        We appreciate your interest in our services. At Brand On, we specialize in delivering high-quality, results-driven solutions tailored to businesses like yours in the **${industry}** sector.
 
-### Highlights of Your Proposal:
+        Based on our initial discussions, we’ve outlined the following services to help you **enhance your brand, streamline your operations, and increase market visibility**.
 
-1. **Your Business at a Glance:**
-   - Industry: ${industry}
-   - Brand Colors: ${brandColors}
-   - Future Goals: ${futureGoals}
+        ----------------------------------------------------------
+        SELECTED SERVICES & INVESTMENT SUMMARY
+        ----------------------------------------------------------
+        Services Requested:
+        ${selectedServices.map(service => `- ${formatServiceName(service)}`).join("\n")}
 
-2. **Selected Services:**
-   ${servicesList || "No services selected yet"}
+        ${merchDetails.length > 0 ? `\nMERCHANDISE DETAILS:\n${merchDetails.join("\n")}` : ""}
 
-3. **Pricing Breakdown:**
-   - Professional Service Fee (based on selected services): $${serviceFee.toFixed(2)}
-   - Complexity/Requirements Fee: $${requirementsFee.toFixed(2)}
-   ${merchFee > 0 ? `- Merchandising Setup Fee: $${merchFee.toFixed(2)}` : ""}
-   - **Total Estimate**: $${totalEstimate.toFixed(2)}
+        Your estimated investment for this project: **$${estimateTotal}**
 
-4. **Our Merchandise Offering:**
-   Empower your brand with a no-inventory, print-on-demand merchandise store. A 10% hosting fee is applied to all orders to cover ongoing maintenance and operational costs, ensuring your store is always running seamlessly and profitably.
+        ----------------------------------------------------------
+        WHY CHOOSE BRAND ON?
+        ----------------------------------------------------------
+        🔹 **Industry-Leading Branding & Digital Marketing:** Our branding and identity solutions position your business as a market leader with a modern, competitive look.  
 
----
+        🔹 **Innovative Web Solutions:** Whether it's a full website redesign or a customer portal, we ensure your site is built for conversions and ease of use.  
 
-### Next Steps:
-1. Review this proposal and identify any refinements you’d like.
-2. Reach out to us directly at **info@brandonmarketing.ca** to discuss further.
-3. Let’s schedule a call to finalize details and launch your solutions.
+        🔹 **High-Impact Merchandising:** With our on-demand merch services, you get **zero upfront costs, no inventory management, and automated fulfillment**, allowing your business to profit without logistics headaches.  
 
-Thank you for trusting us with your brand’s success. We look forward to working together!
+        🔹 **Ongoing Support & Optimization:** We don’t just build — we **optimize, manage, and refine** your digital presence to ensure you stay ahead of the competition.  
 
-Sincerely,  
-**The Brand On Team**  
-"Switch On Your Success."
+        ----------------------------------------------------------
+        MERCH SERVICE FEE STRUCTURE
+        ----------------------------------------------------------
+        We’re committed to **zero-inventory, low-cost, high-quality** merchandising. Each merch order includes a **10% service fee**, which helps **cover logistics, hosting, and continuous support for your online store.** This ensures your store operates efficiently without added management burdens.
 
-==================================================
-Generated by Brand On’s Proposal System
-    `;
+        ----------------------------------------------------------
+        NEXT STEPS
+        ----------------------------------------------------------
+        1️⃣ **Review the proposal and provide any feedback.**  
+        2️⃣ **Let us know if you'd like to customize any details.**  
+        3️⃣ **Once confirmed, we’ll finalize the scope and begin execution.**  
 
-    // Create a Blob for the proposal
-    const blob = new Blob([proposalContent], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
+        If you have any questions or would like to move forward, feel free to reply at your convenience.
 
-    // Create a download link
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${companyName}_Proposal.txt`;
-    link.click();
+        Best regards,  
+        **Brand On Team**  
+        **[Your Contact Information]**  
 
-    // Revoke the URL to free up resources
-    URL.revokeObjectURL(url);
-  });
+        ----------------------------------------------------------
+        Brand On - Elevate Your Business | www.brand-on.com
+        ----------------------------------------------------------
+        `;
+
+        downloadProposal(proposalContent);
+    });
 });
+
+function formatServiceName(service) {
+    switch (service) {
+        case "branding": return "Branding & Identity";
+        case "webdesign": return "Web Design & Development";
+        case "drone": return "Drone Photography";
+        case "socialmedia": return "Social Media Presence";
+        case "merchstore": return "Clothing & Merch Store";
+        default: return service;
+    }
+}
+
+function downloadProposal(content) {
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "Proposal.txt";
+    link.click();
+}
