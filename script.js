@@ -1,134 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const calculateBtn = document.getElementById("calculate-btn");
-  const estimateResultDiv = document.getElementById("estimate-result");
-  const pdfBtn = document.getElementById("pdf-btn");
+  const form = document.getElementById("customer-form");
+  const totalElement = document.getElementById("total");
+  const servicesSelect = document.getElementById("services");
+  const merchInput = document.getElementById("merch");
+  const generatePdfButton = document.getElementById("generate-pdf");
 
-  // Clothing items field logic
-  const clothingDetails = document.getElementById("clothing-details");
-  const clothingItemsInput = document.getElementById("clothing-items");
-  const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
+  const pricing = {
+    branding: 1500,
+    web_design: 2500,
+    digital_ads: 1000,
+    social_media: 800,
+    drone_photography: 1200,
+    progress_photos: 900,
+    merch_design_fee: 100,
+    merch_hosting_fee: 0.1,
+  };
 
-  serviceCheckboxes.forEach((cb) => {
-    cb.addEventListener("change", () => {
-      const merchChecked = [...serviceCheckboxes].some(ch => ch.checked && ch.value === 'merchstore');
-      clothingDetails.style.display = merchChecked ? "block" : "none";
-      if (!merchChecked) {
-        clothingItemsInput.value = 0;
-      }
-    });
-  });
-
-  // Our premium rates
-  // Branding:        $800
-  // Web Design:     $2000
-  // Drone:           $600
-  // Social Media:    $500
-  // Progress Photos: $300
-  // Merch store: $300 base + $50/clothing + 10% service fee
-  // Each requirement => $75
-  function calculateEstimate() {
+  // Update total estimate dynamically
+  function updateTotal() {
     let total = 0;
-    const chosenServices = document.querySelectorAll('input[name="services"]:checked');
 
-    chosenServices.forEach(checkbox => {
-      switch (checkbox.value) {
-        case "branding":
-          total += 800;
-          break;
-        case "webdesign":
-          total += 2000;
-          break;
-        case "drone":
-          total += 600;
-          break;
-        case "socialmedia":
-          total += 500;
-          break;
-        case "progressphotos":
-          total += 300;
-          break;
-        case "merchstore":
-          let merchTotal = 300;
-          const itemCount = parseInt(clothingItemsInput.value) || 0;
-          merchTotal += itemCount * 50;
-          merchTotal *= 1.1; // 10% hosting fee
-          total += merchTotal;
-          break;
-        default:
-          break;
-      }
+    // Calculate selected services
+    const selectedServices = Array.from(servicesSelect.selectedOptions).map(
+      (option) => option.value
+    );
+    selectedServices.forEach((service) => {
+      total += pricing[service];
     });
 
-    // Requirements => $75 each
-    const requirementsCount = parseInt(document.getElementById("requirements").value) || 0;
-    total += requirementsCount * 75;
+    // Calculate merchandise costs
+    const merchQuantity = parseInt(merchInput.value) || 0;
+    if (merchQuantity > 0) {
+      total += merchQuantity * pricing.merch_design_fee;
+      total += merchQuantity * pricing.merch_design_fee * pricing.merch_hosting_fee;
+    }
 
-    return Math.round(total);
+    totalElement.textContent = total.toFixed(2);
   }
 
-  // Show cost on screen for testing
-  function displayEstimate(total) {
-    estimateResultDiv.textContent = `Estimated Cost (Testing Only): $${total}`;
-    estimateResultDiv.style.display = "block";
-  }
+  // Event listeners for updates
+  servicesSelect.addEventListener("change", updateTotal);
+  merchInput.addEventListener("input", updateTotal);
 
-  // Generate PDF for download using jsPDF
-  // We'll include some basic info + the cost
-  async function generatePDF() {
-    // We can use jsPDF's auto page logic
-    const { jsPDF } = window.jspdf; 
-    const doc = new jsPDF();
-
-    // Gather basic info
-    const companyName = document.getElementById("company-name").value;
-    const industry = document.getElementById("industry").value;
-    const requirementsCount = document.getElementById("requirements").value;
-    const totalEstimate = calculateEstimate();
-
-    // Basic text formatting
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(16);
-    doc.text("Brand On - Draft Proposal", 20, 20);
-
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Company Name: ${companyName}`, 20, 30);
-    doc.text(`Industry: ${industry}`, 20, 40);
-    doc.text(`Number of Requirements: ${requirementsCount}`, 20, 50);
-
-    // Summarize selected services
-    const chosen = [...document.querySelectorAll('input[name="services"]:checked')]
-      .map(ch => ch.value)
-      .join(", ");
-    doc.text(`Selected Services: ${chosen || "None"}`, 20, 60);
-
-    // Show total estimate
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    doc.text(`Draft Estimate: $${totalEstimate}`, 20, 75);
-
-    // Add disclaimers about final pricing & discount
-    doc.setFontSize(11);
-    doc.setFont("helvetica", "normal");
-    doc.text(
-      "Note: This is a preliminary quote. Final pricing may be subject to discount\n" + 
-      "or negotiation. Please contact Brand On for a formal contract.",
-      20, 85
+  // Generate PDF Proposal
+  generatePdfButton.addEventListener("click", () => {
+    const companyName = form.company_name.value;
+    const industry = form.industry.value;
+    const additionalInfo = form.additional_info.value;
+    const selectedServices = Array.from(servicesSelect.selectedOptions).map(
+      (option) => option.text
     );
+    const merchQuantity = merchInput.value || 0;
+    const total = totalElement.textContent;
 
-    // Save or open
-    doc.save(`BrandOn-DraftProposal-${companyName}.pdf`);
-  }
+    const proposalContent = `
+      Company Name: ${companyName}
+      Industry: ${industry}
+      Services Selected: ${selectedServices.join(", ")}
+      Merchandise Quantity: ${merchQuantity}
+      Additional Info: ${additionalInfo}
+      Estimated Total: $${total}
+    `;
 
-  calculateBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const total = calculateEstimate();
-    displayEstimate(total);
-    // Show the PDF button once we have a total
-    pdfBtn.style.display = "block";
-  });
-
-  pdfBtn.addEventListener("click", () => {
-    generatePDF();
+    const pdf = new jsPDF();
+    pdf.text("Brand On Proposal", 10, 10);
+    pdf.text(proposalContent, 10, 20);
+    pdf.save(`${companyName}_proposal.pdf`);
   });
 });
